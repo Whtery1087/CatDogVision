@@ -10,13 +10,13 @@ batch_size = 32
 
 train_generator = datagen.flow_from_directory(
     train_data_dir,
-    target_size=(64, 64),
+    target_size=(500, 500), # 500x500 Image
     batch_size=batch_size,
     class_mode='categorical'
 )
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
+    tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(500, 500, 3)), # 500x500 Image
     tf.keras.layers.MaxPooling2D((2, 2)),
     tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
     tf.keras.layers.MaxPooling2D((2, 2)),
@@ -29,6 +29,6 @@ model = tf.keras.Sequential([
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(train_generator, epochs=10)
+model.fit(train_generator, epochs=100) # Edit epochs according to you (100 is recommended for good results)
 
 model.save('data/models/cat_dog_model.h5')

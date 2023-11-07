@@ -10,7 +10,7 @@ model_path = 'data/models/cat_dog_model.h5'
 model = load_model(model_path)
 
 def load_and_preprocess_image(image_path):
-    img = load_img(image_path, target_size=(64, 64))
+    img = load_img(image_path, target_size=(500, 500)) # 500x500 Image
     img = img_to_array(img)
     img = preprocess_input(img)
     return img
