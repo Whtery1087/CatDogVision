@@ -1,5 +1,4 @@
 # CatDogVision
-<<<<<<< HEAD
 
 CatDogVision is a project focused on recognizing images of dogs and cats using a neural network. This project was created for fun and educational purposes.
 
@@ -11,9 +10,6 @@ The goal of this project is to develop a deep learning model that can classify i
 
 - Python 3.11 or lower (Maximum)
 - Required Python libraries: Numpy, Tensorflow
-=======
- 
->>>>>>> parent of be9edcc (data model)
 
 ## Getting Started
 
