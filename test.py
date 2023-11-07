@@ -25,8 +25,8 @@ for filename in os.listdir(test_data_dir):
         predictions = model.predict(np.array([test_image]))
 
         if predictions[0][0] > predictions[0][1]:
-            result = "Kočka"
+            result = "Cat"
         else:
-            result = "Pes"
+            result = "Dog"
 
-        print(f"Soubor: {filename} - Klasifikace: {result}")
+        print(f"File: {filename} - Result: {result}")
