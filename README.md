@@ -1,2 +1,6 @@
 # CatDogVision
  
+
+## Credits:
+- Numpy
+- Tensorflow
