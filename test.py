@@ -4,7 +4,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from tensorflow.keras.models import load_model
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 from werkzeug.utils import secure_filename
 
 app = Flask('catdogvision', template_folder='data/web')
@@ -43,6 +43,14 @@ def predict():
         probability = predictions[0][1] * 100
         result = "Dog" if probability > 50 else "Cat"
         return jsonify({"prediction": result, "probability": round(probability, 2)})
+        
+@app.route('/system.js')
+def get_system_js():
+    return send_file('data/web/system.js')
+
+@app.route('/style.css')
+def get_style_css():
+    return send_file('data/web/style.css')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=3000)

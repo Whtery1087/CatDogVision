@@ -2,44 +2,9 @@
 <html>
 <head>
     <title>CatDogVision</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        h1 {
-            margin-top: 20px;
-        }
-        #photo-container {
-            width: 500px;
-            display: none;
-            margin: 0 auto;
-        }
-        #photo-preview {
-            width: 100%;
-            border-radius: 0.45rem;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input[type="file"] {
-            display: block;
-            margin: 10px auto;
-        }
-        #result {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .cat {
-            color: red;
-        }
-        .dog {
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<center>
     <h1>Upload an image of a cat or a dog</h1>
     <div id="photo-container">
         <img src="" id="photo-preview">
@@ -49,35 +14,6 @@
         <input id="submit" type="submit" value="Submit">
         <h1 id="result"></h1>
     </form>
-</center>
-<script>
-    const form = document.querySelector('form');
-    const photoContainer = document.querySelector('#photo-container');
-    const photoPreview = document.querySelector('#photo-preview');
-    const result = document.querySelector('#result');
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const response = await fetch('/predict', {
-            method: 'POST',
-            body: formData
-        });
-        const data = await response.json();
-        result.textContent = `Prediction: ${data.prediction}`;
-
-        if (data.probability !== undefined) {
-            result.textContent += `, Probability: ${data.probability.toFixed(2)}%`;
-        }
-
-        photoContainer.style.display = 'block';
-        photoPreview.src = URL.createObjectURL(formData.get('file'));
-
-        if (data.prediction === 'Cat') {
-            result.classList.add('cat');
-        } else if (data.prediction === 'Dog') {
-            result.classList.add('dog');
-        }
-    });
-</script>
+<script src="system.js"></script>
 </body>
 </html>

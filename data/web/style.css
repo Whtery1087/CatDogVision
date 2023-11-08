@@ -1,0 +1,33 @@
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    margin-top: 20px;
+}
+#photo-container {
+    width: 500px;
+    display: none;
+    margin: 0 auto;
+}
+#photo-preview {
+    width: 100%;
+    border-radius: 0.45rem;
+}
+form {
+    margin-top: 20px;
+}
+input[type="file"] {
+    display: block;
+    margin: 10px auto;
+}
+#result {
+    font-size: 24px;
+    font-weight: bold;
+}
+.cat {
+    color: red;
+}
+.dog {
+    color: green;
+}
