@@ -1,3 +1,5 @@
+![CatDogVision](https://i.imgur.com/tFclZGq.png)
+
 # Cat Dog Vision
 
 CatDogVision is a project focused on recognizing images of dogs and cats using a neural network. This project was created for fun and educational purposes.
