@@ -45,7 +45,8 @@ Any suggestions for changes are welcome, if you would like to know what else we 
 
 This project is made possible with the help of the following libraries:
 
-- Numpy: [https://numpy.org/](https://numpy.org/)
-- Tensorflow: [https://www.tensorflow.org/](https://www.tensorflow.org/)
+- Numpy: [numpy.org](https://numpy.org)
+- Tensorflow: [tensorflow.org](https://www.tensorflow.org)
+- Flask: [flask.palletsprojects.com](https://flask.palletsprojects.com)
 
-Feel free to explore and expand upon this project for your own learning and enjoyment!
+> Feel free to explore and expand upon this project for your own learning and enjoyment! 😊
