@@ -19,9 +19,9 @@ The goal of this project is to develop a deep learning model that can classify i
 
 3. Install the necessary dependencies by running the following command:
 
-'pip install -r requirements.txt'
-'python train.py'
-'python test.py'
+- `pip install -r requirements.txt` - Install all required libraries.
+- `python train.py` - Train your model.
+- `python test.py` - Test your model.
 
 4. You can now start working with the project.
 
