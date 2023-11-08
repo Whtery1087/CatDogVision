@@ -29,6 +29,9 @@ model = tf.keras.Sequential([
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(train_generator, epochs=100) # Edit epochs according to you (100 is recommended for good results)
+model.fit(train_generator, epochs=10) # Edit epochs according to you (100 is recommended for good results)
+# BIG DATASET - 10 Epochs for save time (10,000+ Photos )
+# MEDIUM - 50 Epochs (5,000+ Photos)
+# SMALL - 100 epochs (1,000 > Photos)
 
 model.save('data/models/cat_dog_model.h5')

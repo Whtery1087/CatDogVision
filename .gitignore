@@ -1,3 +1,4 @@
 data/models/versions
 data/models/cat_dog_model.h5
 data/train
+data/models/VERSIONS.TXT
