@@ -5,3 +5,5 @@
 - [ ] Implement the backpropagation algorithm
 - [ ] Settings file for ports, or CPU, GPU etc.
 - [ ] Add GPU Support for train
+- [ ] Fix procentual bug 0% or 100%
+- [ ] Add detection is not cat/dog is something another
