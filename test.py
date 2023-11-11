@@ -79,7 +79,8 @@ def index():
     uploaded_images_path = 'uploads'
     for filename in os.listdir(uploaded_images_path):
         file_path = os.path.join(uploaded_images_path, filename)
-        os.remove(file_path)
+        if filename != 'info.md':  # BLOCK DELETE INFO.MD FILE REMOVE THIS LINE IF YOU WANT (82 Line)
+            os.remove(file_path)
 
     return render_template('index.html')
 
