@@ -34,23 +34,37 @@ def adjust_model_weights(model, test_image):
 
     weight_history.append(current_weights)
     
-def train_model_with_feedback(model, test_image, user_feedback):
+def train_model_with_feedback(model, test_image, user_feedback, weight_history, model_path):
     start_time = time.time()
+    model_layers = model.layers
+    for i, layer in enumerate(model_layers):
+        print(f"Layer {i}: {layer.name} - {layer.input_shape}")
 
     if user_feedback == 'correct':
-
         weight_history.append(model.get_weights())
     elif user_feedback == 'incorrect':
         current_weights = model.get_weights()
+        predictions = model.predict(np.array([test_image]))
+        prediction_probability = predictions[0][1]
+        optimal_weights = current_weights.copy()
 
-        for layer in range(len(current_weights)):
-            current_weights[layer] *= 0.9
+        if prediction_probability < 0.5:
+            user_prediction = "Dog"
+            new_probability = 90.0
+            response = {"prediction": user_prediction, "probability": new_probability}
+        else:
+            user_prediction = "Cat"
+            new_probability = 90.0
+            response = {"prediction": user_prediction, "probability": new_probability}
 
-        model.set_weights(current_weights)
+        for i, layer_weights in enumerate(optimal_weights):
+            if i < len(optimal_weights) - 1:
+                optimal_weights[i] *= 0.9  # Zde je úprava vah neuronů.
+            else:
+                optimal_weights[i] = 0.1
 
-        print(f"Adjusted weights after incorrect feedback: {current_weights}")
-
-        weight_history.append(current_weights)
+        model.set_weights(optimal_weights)
+        weight_history.append(optimal_weights)
     else:
         print("Invalid feedback value. Use 'correct' or 'incorrect'.")
 
@@ -60,6 +74,7 @@ def train_model_with_feedback(model, test_image, user_feedback):
 
     model.save(model_path)
     print(f"Model saved with updated weights: {model_path}")
+
 
 def print_weight_history():
     for i, weights in enumerate(weight_history):
@@ -128,10 +143,10 @@ def feedback():
     if user_feedback == 'incorrect':
         adjust_model_weights(model, test_image)
 
-    train_model_with_feedback(model, test_image, user_feedback)
+    train_model_with_feedback(model, test_image, user_feedback, weight_history, model_path)
 
     model.save(model_path)
-    print(f"Model saved to {model_path}")
+    print(f"Model saved with updated weights: {model_path}")
 
     print_weight_history()
 

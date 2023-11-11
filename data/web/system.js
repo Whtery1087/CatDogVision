@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         }
                     }
 
-                    // Remove the 'hidden' attribute to show the feedback form
                     if (feedbackForm) {
                         feedbackForm.removeAttribute('hidden');
                     }
@@ -45,22 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        // Add a submit event listener to the feedback form
         feedbackForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const formData = new FormData(feedbackForm);
 
-            // Use fetch to send feedback data to the server
             const feedbackResponse = await fetch('/feedback', {
                 method: 'POST',
                 body: formData
             });
 
-            // Handle the feedback response as needed
             const feedbackData = await feedbackResponse.json();
             console.log(feedbackData);
 
-            // Optionally, reset or hide the form after feedback submission
             feedbackForm.reset();
             feedbackForm.setAttribute('hidden', 'true');
         });
