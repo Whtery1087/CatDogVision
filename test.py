@@ -43,36 +43,13 @@ def train_model_with_feedback(model, test_image, user_feedback, weight_history, 
         current_weights = model.get_weights()
         predictions_before_update = model.predict(np.array([test_image]))[0][1]
 
-        if predictions_before_update < 0.5:  
-            user_prediction = "Dog"
-            new_probability = round(100 - (predictions_before_update * 100), 2)
-
-            response = {
-                "prediction": user_prediction,
-                "probability": new_probability
-            }
-
-            optimal_weights = current_weights.copy()
-
-            for i, layer in enumerate(optimal_weights):
-                optimal_weights[i] *= -1
-
-            model.set_weights(optimal_weights)
-            weight_history.append(optimal_weights)
+        if predictions_before_update < 0.5:
+            optimal_weights = [np.random.standard_normal(w.shape) for w in current_weights]
         else:
-            user_prediction = "Cat"
-            new_probability = round(100 - (predictions_before_update * 100), 2)
-            response = {
-                "prediction": user_prediction,
-                "probability": new_probability
-            }
+            optimal_weights = [np.random.standard_normal(w.shape) for w in current_weights]
 
-            optimal_weights = current_weights.copy()
-            for i, layer in enumerate(optimal_weights):
-                optimal_weights[i] *= -1
-
-            model.set_weights(optimal_weights)
-            weight_history.append(optimal_weights)
+        model.set_weights(optimal_weights)
+        weight_history.append(optimal_weights)
     else:
         print("Invalid feedback value. Use 'correct' or 'incorrect'.")
 
