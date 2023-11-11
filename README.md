@@ -10,8 +10,7 @@ The goal of this project is to develop a deep learning model that can classify i
 
 ## 🔨 Requirements
 
-- Python **3.11** or lower (⚠️ Maximum)
-- Required Python libraries: Numpy, Tensorflow
+- Python **3.9-3.11** or lower (⚠️ Maximum)
 
 ## 😊 Getting Started
 

@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CatDogVision</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Dog Vision</title>
+    <link rel="stylesheet" href="./web/style.css">
 </head>
 <body>
-    <h1>Upload an image of a cat or a dog</h1>
+    <h1>Cat Dog Vision</h1>
     <div id="photo-container">
         <img src="" id="photo-preview">
     </div>
-    <form method="post" enctype="multipart/form-data">
-        <input id="file" type="file" name="file">
-        <input id="submit" type="submit" value="Submit">
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Submit</button>
         <h1 id="result"></h1>
     </form>
-<script src="system.js"></script>
+    <form id="feedback-form" action="/feedback" method="post" hidden>
+        <label for="feedback">Is the prediction correct?</label>
+        <input type="radio" name="feedback" value="correct" required> Yes
+        <input type="radio" name="feedback" value="incorrect" required> No
+        <input type="hidden" id="image_path" name="image_path" value="">
+        <button type="submit" onclick="addImagePath()">Submit Feedback</button>
+    </form>
+    <script src="./web/system.js"></script>
+    <script>
+        function addImagePath() {
+            const formData = new FormData(document.querySelector('form'));
+            formData.append('image_path', formData.get('file').name);
+            document.querySelector('#image_path').value = formData.get('image_path');
+            document.querySelector('form').submit();
+        }
+    </script>
 </body>
 </html>
