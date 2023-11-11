@@ -40,6 +40,7 @@ def train_model_with_feedback(model, test_image, user_feedback, weight_history, 
     if user_feedback == 'correct':
         current_weights = model.get_weights()
         predictions_before_update = model.predict(np.array([test_image]))[0][1]
+
         if predictions_before_update < 0.5:
             diff = 1.0 - predictions_before_update
             diff = diff if diff < 0.2 else 0.2 
@@ -48,31 +49,31 @@ def train_model_with_feedback(model, test_image, user_feedback, weight_history, 
             weight_history.append(updated_weights)
         else:
             weight_history.append(current_weights)
+
     elif user_feedback == 'incorrect':
         current_weights = model.get_weights()
         predictions_before_update = model.predict(np.array([test_image]))[0][1]
+        prediction_label = 'Cat' if predictions_before_update < 0.5 else 'Dog'
 
-        if predictions_before_update < 0.5:
-            ai_said = "Cat"
+        diff = abs(predictions_before_update - 0.5)
+        diff = diff if diff < 0.2 else 0.2
+
+        if user_feedback == prediction_label:
+
+            new_weights = [w + 0.1 * diff * np.random.normal(size=w.shape) for w in current_weights]
         else:
-            ai_said = "Dog"
 
-        if user_feedback == ai_said:
-            diff = 1.0 - predictions_before_update if user_feedback == 'Cat' else predictions_before_update
-            diff = diff if diff < 0.2 else 0.2
-            optimal_weights = [w + 0.1 * diff * np.random.normal(size=w.shape) for w in current_weights]
-        else:
-            diff = predictions_before_update if user_feedback == 'Cat' else 1.0 - predictions_before_update
-            diff = diff if diff < 0.2 else 0.2
-            optimal_weights = [w - 0.1 * diff * np.random.normal(size=w.shape) for w in current_weights]
+            new_weights = [w - 0.1 * diff * np.random.normal(size=w.shape) for w in current_weights]
 
-        model.set_weights(optimal_weights)
-        weight_history.append(optimal_weights)
+        model.set_weights(new_weights)
+        weight_history.append(new_weights)
+
     else:
         print("Invalid feedback value. Use 'correct' or provide specific feedback (Cat/Dog).")
 
     end_time = time.time()
     elapsed_time = end_time - start_time
+    print(f"Training time: {elapsed_time} seconds")
     model.save(model_path)
 
 def print_weight_history():
