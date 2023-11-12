@@ -23,6 +23,7 @@ The goal of this project is to develop a deep learning model that can classify i
 - `pip install -r requirements.txt` - Install all required libraries.
 - `python train.py` - Train your model.
 - `python test.py` - Test your model.
+- `pip freeze > requirements.txt` - generate new requirements.txt (ONLY FOR CONTRIBUTORS)
 
 4. You can now start working with the project.
 
