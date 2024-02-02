@@ -10,8 +10,7 @@ The goal of this project is to develop a deep learning model that can classify i
 
 ## 🔨 Requirements
 
-- Python **3.9-3.11** (⚠️ Maximum)
-
+- Python **Min. 3.9 - Max. 3.11** (⚠️ Hardlimit)
 ## 😊 Getting Started
 
 1. Clone this repository to your local machine.
